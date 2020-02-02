@@ -1,0 +1,170 @@
+<nav class="navbar navbar-expand-sm bg-dark mx-auto navbar-dark">
+  <a class="fa fa-arrow-left" [routerLink]="'/home'" href="#" style="color:white;padding:5px;"></a>
+  <!-- <a class="navbar-brand" [routerLink]="'/home'" href="#">back</a> -->
+
+  <span class="navbar-brand mx-auto d-block text-center order-0 order-md-1">DashBoard</span>
+  <span class="navbar-brand  d-block text-right order-0 order-md-1" style="cursor: pointer;" (click)="logOut()">
+      LogOut</span>
+</nav>
+
+<div *ngIf="isGlobalError" style="margin-left:45%;margin-right:30%;margin-top: 20%;">
+  <p>Whops!! Some Error Occured</p>
+</div>
+
+<div *ngIf="!isGlobalError">
+
+  <div class="container" style="padding-top: 10px;">
+
+    <div class="row">
+
+
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Users</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalUsers}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fa fa-user fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Country</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalCountry}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-flag fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">City</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{totalCity}}</div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-city fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-5 col-lg-5">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Gender Wise Users</h6>
+            <div class="dropdown no-arrow">
+            </div>
+          </div>
+          <div class="card-body">
+
+            <ngx-charts-pie-chart style="padding-right: 0px;" [view]="genderView" [scheme]="ColorScheme"
+              [results]="genderData" [gradient]="gradient" [legendPosition]="legendPosition" [labels]="showLabels"
+              [doughnut]="isDoughnut" [legend]="'true'">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Gender Wise Users</h6>
+            <div class="dropdown no-arrow">
+            </div>
+          </div>
+          <div class="card-body">
+            <ngx-charts-bar-vertical [view]="genderView" [scheme]="ageColorSchema" [results]="ageData"
+              [gradient]="gradient" [xAxis]="'true'" [yAxis]="'true'" [legend]="'true'" [showXAxisLabel]="'true'"
+              [showYAxisLabel]="'true'" [xAxisLabel]="'Age'" [yAxisLabel]="'No. of User'">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-7 col-lg-7">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Country wise users</h6>
+
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <ngx-charts-bar-horizontal style="padding-left: 5px;" [view]="CountryCityView" [scheme]="countryColorSchema"
+              [results]="countryDataTmp" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+              [xAxisLabel]="'Users'" [yAxisLabel]="'Country'" [barPadding]="10">
+            </ngx-charts-bar-horizontal>
+
+          </div>
+          <div *ngIf="countryData.length > noOfCountryShow" style="text-align: center;padding: 10px;">
+            <span *ngIf="cCounter > 0" style="padding:10px;">
+              <div class="btn btn-primary" (click)="updatePreviousCountry()">Previous</div>
+            </span>
+            <span *ngIf="cFlag">
+              <div class="btn btn-primary" (click)="updateNextCountry()">Next</div>
+            </span>
+          </div>
+
+
+        </div>
+
+
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">City wise users</h6>
+
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <ngx-charts-bar-horizontal [view]="CountryCityView" [scheme]="countryColorSchema" [results]="cityDataTmp"
+              [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Users'"
+              [yAxisLabel]="'City'" [barPadding]="20">
+            </ngx-charts-bar-horizontal>
+          </div>
+          <div *ngIf="countryData.length > noOfCountryShow" style="text-align: center;padding: 10px;">
+            <div *ngIf="cityData.length > noOfCountryShow">
+              <div *ngIf="cityFlag">
+                <div class="btn btn-primary" (click)="updateNextCity()">Next</div>
+              </div>
+              <div *ngIf="cityCounter > 0">
+                <div class="btn btn-primary" (click)="updatePreviousCity()">Previous</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

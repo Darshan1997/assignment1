@@ -1,0 +1,101 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 col-4 mx-auto my-5">
+            <div>
+                <div class="myform form">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>Sign Up!</h1>
+                        </div>
+                    </div>
+                    <form [formGroup]="registerFormGroup" (ngSubmit)="register(registerFormGroup)">
+                        <div class="form-group">
+                            <label for="firstname">FirstName<span style="color:red">*</span></label>
+                            <input type="firstname" name="firstname" formControlName="firstname" class="form-control"
+                                id="firstname" placeholder="Enter FirstName">
+                            <p *ngIf="f.firstname.touched && f.firstname.errors">This Field is Requried</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">LastName</label>
+                            <input type="lastname" name="lastname" formControlName="lastname" class="form-control"
+                                id="lastname" placeholder="Enter LastName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" formControlName="email" class="form-control" id="email"
+                                placeholder="Enter email">
+                            <p *ngIf="f.email.touched && f.email.errors">Please Enter a Valid Email</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age<span style="color:red">*</span></label>
+                            <input type="number" name="age" formControlName="age" class="form-control" id="age"
+                                placeholder="Age" min=10 max=120>
+                            <p *ngIf="f.age.touched && f.age.errors">This Field is Requried</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender<span style="color:red">*</span></label>
+                            <select class="form-control" formControlName="gender">
+                                <option>Select Gender</option>
+                                <option *ngFor="let gender of gender">{{gender}}</option>
+                            </select>
+                            <p *ngIf="f.gender.touched && f.gender.errors">This Field is Requried</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City<span style="color:red">*</span></label>
+                            <select class="form-control" formControlName="city">
+                                <option value="">Choose your city</option>
+                                <option *ngFor="let city of city">{{city}}</option>
+                            </select>
+                            <p *ngIf="f.city.touched && f.city.errors">This Field is Requried</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country<span style="color:red">*</span></label>
+                            <select class="form-control" formControlName="country">
+                                <option value="">Choose your country</option>
+                                <option *ngFor="let country of country">{{country}}</option>
+                            </select>
+                            <p *ngIf="f.country.touched && f.country.errors">This Field is Requried</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phonenumber">PhoneNumber<span style="color:red">*</span></label>
+                            <input type="number" name="phonenumber" formControlName="phonenumber" class="form-control"
+                                id="phonenumber" placeholder="Enter Phone Number">
+                            <p *ngIf="f.phonenumber.touched && f.phonenumber.errors">This Field is Requried</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password<span style="color:red">*</span></label>
+                            <input type="password" name="password" formControlName="password" class="form-control"
+                                id="password" placeholder="Enter Password">
+                            <p *ngIf="f.password.touched && f.password.errors">This Field is Requried</p>
+                        </div>
+
+                      
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" [disabled]="!registerFormGroup.valid"
+                                class="btn btn-block mybtn btn-primary tx-tfm">Register</button>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="login-or">
+                                <hr class="hr-or">
+                                <span class="span-or">or</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-center">Have account? <a [routerLink]="'/login'" href="#" id="signin">Sign in
+                                    here</a></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
